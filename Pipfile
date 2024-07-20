@@ -4,9 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
 loguru = "*"
 pyyaml = "*"
+requests = "*"
+flask = { extras = ["async"], version = "*" }
+pytelegrambotapi = "*"
 
 [dev-packages]
 

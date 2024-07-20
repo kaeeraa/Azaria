@@ -1,0 +1,17 @@
+# config.toml
+
+# Do not touch this value, it is used to identify the config file
+config-version = 1
+
+# ignored if 'key' env variable is set
+token = "123456789:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
+
+[explicit-control]
+# false if ask every start
+enabled = false
+# "web" if only web control
+# "cli" if only terminal control
+type = "web"
+
+
+
