@@ -12642,4 +12642,14 @@ Sessionx.vim
 nohup.out
 
 /logs/**
-/.idea/**
+/.idea/**!/app.py
+!/config_handler.py
+!/LICENSE
+!/log_handle.py
+!/version.py
+!/Pipfile
+!/Pipfile.lock
+!/resources/
+!/static/
+!/templates/
+!/user/
