@@ -8,7 +8,12 @@ It imports necessary modules and sets up the environment.
 # -*- coding: utf-8 -*-
 
 import shutil
-import tomllib
+
+try:
+    import tomllib
+except (ModuleNotFoundError, ImportError):
+    # noinspection PyPackageRequirements,PyUnresolvedReferences
+    import tomli as tomllib
 import sys
 
 # pylint: disable=import-error
