@@ -6,18 +6,21 @@ It imports the necessary dependencies and sets up the environment for the applic
 
 from logging import INFO
 
-from os import environ
-
-
 import flask
 import telebot
+import dotenv
 
 # pylint: disable=import-error
 from log_handle import logger as log
+from config_handler import result as config
 
-# from config_handler import result as config
+if dotenv.get_key(".env", "KEY"):
+    bot = telebot.TeleBot(token=dotenv.get_key(".env", "KEY"))
+else:
+    bot = telebot.TeleBot(token=config["token"])
+
 # from version import __version__
-bot = telebot.TeleBot(token=environ.get("KEY"))
+
 
 logger = telebot.logger
 telebot.logger.setLevel(INFO)

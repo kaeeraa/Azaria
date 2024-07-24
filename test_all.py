@@ -8,32 +8,40 @@ The tests are written using the pytest framework.
 
 # -*- coding: utf-8 -*-
 
-from os import environ
-
+from typing import Any
 from json import dumps
-from telebot import TeleBot
-from config_handler import init  # pylint: disable=import-error
 
-bot = TeleBot(token=environ.get("KEY"))
+from telebot import TeleBot
+from telebot.types import Message
+from dotenv import get_key
+
+# pylint: disable=import-error
+from config_handler import init
+from config_handler import result as config
+
+if get_key(".env", "KEY"):
+    bot = TeleBot(token=get_key(".env", "KEY"))
+else:
+    bot = TeleBot(token=config["token"])
 
 
 def test_send_message():
     """Test the send_message function."""
 
-    def send_message(chat_id: str = None, message: str = None) -> tuple:
+    def send_message(chat_id: str = None, message: str = None) -> tuple[Any, int]:
         """
         Send a message to the specified chat ID.
 
         :returns: A JSON response indicating whether the message was sent successfully.
         """
-
         try:
-            response = bot.send_message(chat_id, message)
+            response: Message = bot.send_message(chat_id, message)
         except Exception as e:  # pylint: disable=broad-except
             return dumps({'success': False, 'error': str(e)}), 500
         return dumps(response.json), 201
 
-    assert send_message(1807149159, 'test message')[1] == 201
+    request: tuple[Any, int] = send_message(1807149159, 'test message')
+    assert request[1] == 201
 
 
 def test_init():
