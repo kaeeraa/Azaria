@@ -5,10 +5,10 @@ name = "pypi"
 
 [packages]
 loguru = "*"
-pyyaml = "*"
 requests = "*"
 flask = { extras = ["async"], version = "*" }
 pytelegrambotapi = "*"
+pytest = "*"
 
 [dev-packages]
 

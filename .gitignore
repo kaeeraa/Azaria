@@ -12645,13 +12645,11 @@ nohup.out
 /.idea/**!/app.py
 !/config_handler.py
 !/LICENSE
-!/log_handle.py
-!/version.py
+!/*.py
 !/Pipfile
 !/Pipfile.lock
 !/resources/
 !/static/
 !/templates/
 !/user/
-!/static/materialize.min.css
-!/static/materialize.min.js
+

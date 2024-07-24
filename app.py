@@ -7,7 +7,7 @@ It imports the necessary dependencies and sets up the environment for the applic
 from logging import INFO
 
 from os import environ
-from threading import Thread
+
 
 import flask
 import telebot
@@ -17,12 +17,15 @@ from log_handle import logger as log
 
 # from config_handler import result as config
 # from version import __version__
-
 bot = telebot.TeleBot(token=environ.get("KEY"))
+
 logger = telebot.logger
 telebot.logger.setLevel(INFO)
 
+bot.infinity_polling()
+
 log.info("Telebot started!")
+
 app = flask.Flask(__name__)
 
 
@@ -52,6 +55,3 @@ async def send_message() -> flask.Response:
     except Exception as e:  # pylint: disable=broad-except
         return flask.jsonify({'success': False, 'error': str(e)})
     return flask.jsonify(response.json), 201
-
-
-Thread(target=bot.infinity_polling).start()
