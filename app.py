@@ -5,19 +5,30 @@ It imports the necessary dependencies and sets up the environment for the applic
 """
 
 from logging import INFO
+from os import environ
+from sys import argv
 
 import flask
 import telebot
-import dotenv
+from telebot import TeleBot
+from dotenv import get_key
 
 # pylint: disable=import-error
 from log_handle import logger as log
 from config_handler import result as config
 
-if dotenv.get_key(".env", "KEY"):
-    bot = telebot.TeleBot(token=dotenv.get_key(".env", "KEY"))
+if argv and argv[1].startswith("-t "):
+    bot = TeleBot(token=argv[1][3:])
+    log.info("Using command line argument KEY")
+elif environ.get("KEY"):
+    bot = TeleBot(token=environ.get("KEY"))
+    log.info("Using environment variable KEY")
+elif get_key(".env", "KEY"):
+    bot = TeleBot(token=get_key(".env", "KEY"))
+    log.info("Using .env file KEY")
 else:
-    bot = telebot.TeleBot(token=config["token"])
+    bot = TeleBot(token=config["token"])
+    log.info("Using config file KEY")
 
 # from version import __version__
 

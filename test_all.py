@@ -10,6 +10,8 @@ The tests are written using the pytest framework.
 
 from typing import Any
 from json import dumps
+from sys import argv
+from os import environ
 
 from telebot import TeleBot
 from telebot.types import Message
@@ -18,11 +20,20 @@ from dotenv import get_key
 # pylint: disable=import-error
 from config_handler import init
 from config_handler import result as config
+from log_handle import logger as log
 
-if get_key(".env", "KEY"):
+if argv and argv[1].startswith("-t "):
+    bot = TeleBot(token=argv[1][3:])
+    log.info("Using command line argument KEY")
+elif environ.get("KEY"):
+    bot = TeleBot(token=environ.get("KEY"))
+    log.info("Using environment variable KEY")
+elif get_key(".env", "KEY"):
     bot = TeleBot(token=get_key(".env", "KEY"))
+    log.info("Using .env file KEY")
 else:
     bot = TeleBot(token=config["token"])
+    log.info("Using config file KEY")
 
 
 def test_send_message():
