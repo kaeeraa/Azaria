@@ -1,11 +1,9 @@
-flask==*
-pytest==*
-loguru==*
-python-dotenv==*
-pytelegrambotapi==*
+flask
+pytest
+loguru
+python-dotenv
+black
+pylint
+isort
+mypy
 
-# Dev dependencies
-mypy==*
-pylint==*
-isort==*
-black[d]==*
