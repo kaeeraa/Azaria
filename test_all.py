@@ -22,8 +22,8 @@ from config_handler import init
 from config_handler import result as config
 from log_handle import logger as log
 
-if argv and argv[1].startswith("-t "):
-    bot = TeleBot(token=argv[1][3:])
+if argv and len(argv) >= 3 and argv[1] == "--token":
+    bot = TeleBot(token=argv[2])
     log.info("Using command line argument KEY")
 elif environ.get("KEY"):
     bot = TeleBot(token=environ.get("KEY"))
