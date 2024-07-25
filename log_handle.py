@@ -66,13 +66,22 @@ logger.level(Level.WARNING, color=Level.WARNING_COLOR, icon=Level.WARNING_ICON)
 logger.level(Level.ERROR, color=Level.ERROR_COLOR, icon=Level.ERROR_ICON)
 
 # setting up stdout handler
-logger.add(stdout,
-           format="<white>{time:HH:mm:ss}</white> |"
-                  " <level>[{level.icon}]</level> |"
-                  " <level>{message}</level>",
-           colorize=True, level=Level.INFO)
+logger.add(
+    stdout,
+    format="<white>{time:HH:mm:ss}</white> |"
+    " <level>[{level.icon}]</level> |"
+    " <level>{message}</level>",
+    colorize=True,
+    level=Level.INFO,
+)
 
 # setting up file handler
-logger.add("logs/{time:YYYY-MM-DD}.log", format="{time:HH:mm:ss} | {level} | {message}",
-           level=Level.TRACE, rotation="00:00", compression="zip", retention="7 days",
-           colorize=False)
+logger.add(
+    "logs/{time:YYYY-MM-DD}.log",
+    format="{time:HH:mm:ss} | {level} | {message}",
+    level=Level.TRACE,
+    rotation="00:00",
+    compression="zip",
+    retention="7 days",
+    colorize=False,
+)

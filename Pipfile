@@ -10,6 +10,8 @@ flask = { extras = ["async"], version = "*" }
 pytelegrambotapi = "*"
 pytest = "*"
 python-dotenv = "*"
+mypy = "*"
+black = { extras = ["d"], version = "*" }
 
 [dev-packages]
 

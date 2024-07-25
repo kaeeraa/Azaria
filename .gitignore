@@ -12653,3 +12653,6 @@ nohup.out
 !/templates/
 !/user/
 
+!/.editorconfig
+!/requirements.txt
+!/pyproject.toml

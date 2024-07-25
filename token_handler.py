@@ -7,9 +7,10 @@ The bot token is fetched from the configuration file and passed to the TeleBot o
 The bot token can be passed as a command line argument or as an environment variable.
 If none of these options are provided, the bot token will be fetched from the configuration file.
 """
+from os import environ
+
 # -*- coding: utf-8 -*-
 from sys import argv
-from os import environ
 from dotenv import get_key
 from telebot import TeleBot
 
