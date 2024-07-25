@@ -40,6 +40,4 @@ jobs:
         
     - name: Test with pytest
       run: |
-        pytest
-      env:
-          KEY: ${{ secrets.KEY }}
+        pytest --token ${{ secrets.KEY }}
