@@ -12656,3 +12656,4 @@ nohup.out
 !/.editorconfig
 !/requirements.txt
 !/pyproject.toml
+!/.github/workflows/
