@@ -5,38 +5,19 @@ It imports the necessary dependencies and sets up the environment for the applic
 """
 
 from logging import INFO
-from os import environ
-from sys import argv
+from threading import Thread
 
 import flask
 import telebot
-from telebot import TeleBot
-from dotenv import get_key
 
 # pylint: disable=import-error
 from log_handle import logger as log
-from config_handler import result as config
-
-if argv and len(argv) >= 3 and argv[1] == "--token":
-    bot = TeleBot(token=argv[2])
-    log.info("Using command line argument KEY")
-elif environ.get("KEY"):
-    bot = TeleBot(token=environ.get("KEY"))
-    log.info("Using environment variable KEY")
-elif get_key(".env", "KEY"):
-    bot = TeleBot(token=get_key(".env", "KEY"))
-    log.info("Using .env file KEY")
-else:
-    bot = TeleBot(token=config["token"])
-    log.info("Using config file KEY")
-
-# from version import __version__
-
+from token_handler import result as bot
 
 logger = telebot.logger
 telebot.logger.setLevel(INFO)
 
-bot.infinity_polling()
+Thread(target=bot.infinity_polling, daemon=True).start()
 
 log.info("Telebot started!")
 
@@ -68,4 +49,4 @@ async def send_message() -> flask.Response:
         response = bot.send_message(chat_id, message)
     except Exception as e:  # pylint: disable=broad-except
         return flask.jsonify({'success': False, 'error': str(e)})
-    return flask.jsonify(response.json), 201
+    return flask.jsonify(response), 201
