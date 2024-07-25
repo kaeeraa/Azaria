@@ -6,4 +6,6 @@ black
 pylint
 isort
 mypy
+flake8
+pytelegrambotapi
 
